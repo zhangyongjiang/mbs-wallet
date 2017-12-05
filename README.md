@@ -1,5 +1,7 @@
 Copied from https://github.com/BWallet
 
+![MBS](bwallet.jpg?raw=true "MBS")
+
 硬件
 BWallet内含CPU处理器、独立存储空间，正面有一个LED显示屏和两个按钮，内部不含电池，USB接口负责硬件的供电和与外部设备的通信。
 
