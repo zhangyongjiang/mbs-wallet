@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <_PropertySheetDisplayName>Libbitcoin Examples Common Settings</_PropertySheetDisplayName>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+
+  <!-- Configuration -->
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <DisableSpecificWarnings>%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <EnablePREfast>false</EnablePREfast>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0600;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="$(Configuration.IndexOf('Release')) != -1">BITCOIN_DISABLE_ASSERTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <!-- BUGBUG: there are linker errors in two examples. -->
+    <Link>
+      <AdditionalOptions Condition="$(Configuration.IndexOf('Debug')) != -1">/OPT:NOLBR /IGNORE:4099 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <!-- Extensions -->
+  
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)libbitcoin.import.props" />
+  </ImportGroup>
+
+  <PropertyGroup>
+    <!-- Libbitcoin must also be built with leveldb. -->
+    <Option-leveldb>true</Option-leveldb>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="$(Configuration.IndexOf('DEXE')) != -1">
+    <Linkage-openssl>dynamic</Linkage-openssl>
+    <!--<Linkage-secp256k1>dynamic</Linkage-secp256k1>-->
+    <Linkage-secp256k1>static</Linkage-secp256k1>
+    <Linkage-libbitcoin>dynamic</Linkage-libbitcoin>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.IndexOf('LEXE')) != -1">
+    <Linkage-openssl>static</Linkage-openssl>
+    <Linkage-secp256k1>ltcg</Linkage-secp256k1>
+    <Linkage-libbitcoin>ltcg</Linkage-libbitcoin>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.IndexOf('SEXE')) != -1">
+    <Linkage-openssl>static</Linkage-openssl>
+    <Linkage-secp256k1>static</Linkage-secp256k1>
+    <Linkage-libbitcoin>static</Linkage-libbitcoin>
+  </PropertyGroup>
+
+  <!-- Messages -->
+
+  <Target Name="OptionInfo" BeforeTargets="PrepareForBuild">
+    <Message Text="Option-leveldb    : $(Option-leveldb)" Importance="high"/>
+    <Message Text="Option-testnet    : $(Option-testnet)" Importance="high"/>
+  </Target>
+
+  <Target Name="LinkageInfo" BeforeTargets="PrepareForBuild">
+    <Message Text="Linkage-openssl   : $(Linkage-openssl)" Importance="high"/>
+    <Message Text="Linkage-libbitcoin: $(Linkage-libbitcoin)" Importance="high"/>
+    <Message Text="Linkage-secp256k1 : $(Linkage-secp256k1)" Importance="high"/>
+  </Target>
+
+</Project>
+
+
+

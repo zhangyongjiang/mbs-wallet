@@ -1,0 +1,111 @@
+<div ng-controller="DeviceCtrl">
+  <div ng-controller="AccountCtrl">
+
+    <ng-include src="'views/account/nav.html'"></ng-include>
+
+    <div class="tab-content sign"
+         ng-controller="AccountSignCtrl">
+
+      <div class="row">
+        <div class="col-md-6">
+          <form name="form"
+                ng-submit="signSaveAddress() && sign()">
+            <fieldset>
+              <legend translate="account.sign.sign-message">Sign message</legend>
+
+              <div class="alert"
+                   ng-show="hasErrorMessage('sign')"
+                   ng-class="getAlertClass('sign')">
+                {{sign.res.message}}
+              </div>
+
+              <div class="form-group">
+                <label for="sign-message" translate="account.sign.message">Message</label>
+                <textarea class="form-control"
+                          name="message" id="sign-message"
+                          ng-model="sign.message"
+                          ng-change="resetSign()"></textarea>
+              </div>
+
+              <div class="form-group has-feedback"
+                  ng-class="getSignAddressClass()">
+                <label for="sign-address" translate="account.sign.address">Address</label>
+                <input type="text" class="form-control"
+                       name="address" id="sign-address"
+                       ng-model="sign.address"
+                       ng-change="resetSign(); signSaveAddress()"
+                       >
+                <span class="glyphicon glyphicon-ok form-control-feedback"
+                  aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-remove form-control-feedback"
+                  aria-hidden="true"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="sign-signature" translate="account.sign.signature">Signature</label>
+                <textarea class="form-control"
+                          name="signature" id="sign-signature"
+                          rows="4" readonly="readonly"
+                          ng-model="sign.signature"></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary"
+                  ng-disabled="!isSignValid()" translate="account.sign.sign">
+                Sign
+              </button>
+            </fieldset>
+          </form>
+        </div>
+
+        <div class="col-md-6">
+          <form name="form"
+                ng-submit="verify()">
+            <fieldset>
+              <legend translate="account.sign.verify-message">Verify message</legend>
+
+              <div class="alert"
+                   ng-show="hasErrorMessage('verify')"
+                   ng-class="getAlertClass('verify')">
+                {{verify.res.message}}
+              </div>
+
+              <div class="form-group">
+                <label for="verify-message" translate="account.sign.message">Message</label>
+                <textarea class="form-control"
+                          name="message" id="verify-message"
+                          required
+                          ng-model="verify.message"
+                          ng-change="verify.res.status = null"
+                          ></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="verify-address" translate="account.sign.address">Address</label>
+                <input type="text" class="form-control"
+                       name="address" id="verify-address"
+                       required
+                       ng-model="verify.address"
+                       ng-change="resetVerify()"
+                       >
+              </div>
+
+              <div class="form-group">
+                <label for="verify-signature" translate="account.sign.signature">Signature</label>
+                <textarea class="form-control"
+                          name="signature" id="verify-signature"
+                          rows="4"
+                          ng-model="verify.signature"
+                          ng-change="resetVerify()"
+                          ></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" translate="account.sign.verify">
+                Verify
+              </button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

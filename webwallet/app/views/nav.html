@@ -1,0 +1,97 @@
+<ul class="nav nav-devices" ng-controller="NavCtrl">
+  <!-- Device -->
+  <li ng-repeat="device in devices()"
+      ng-class="{ disabled: device.isLoading() }">
+
+    <a ng-href="#/device/{{device.id}}"
+       ng-class="{ active: isActive('/device/{{device.id}}$') }">
+      <h4>
+        {{device.label()}}
+        <span class="pull-right dev-status-icon icon-loading" title="{{ 'nav.device-loading' | translate }}"
+              ng-show="device.isLoading()"></span>
+      </h4>
+
+      <small class="dev-status">
+        <span class="dev-status-{{device.status()}}"
+              ng-switch="device.status()">
+          <span ng-switch-when="loading">
+            <span class="glyphicon glyphicon-cog"></span>
+            {{ device.statusLabel() || ('nav.device-status-loading' | translate) }}&hellip;
+          </span>
+          <span ng-switch-when="connected">
+            <span class="glyphicon glyphicon-check"></span>
+            {{ device.statusLabel() || ('nav.device-status-connected' | translate) }}
+          </span>
+          <span ng-switch-when="disconnected">
+            <span class="glyphicon glyphicon-unchecked"></span>
+            {{ device.statusLabel() || ('nav.device-status-disconnected' | translate) }}
+          </span>
+        </span>
+      </small>
+    </a>
+
+    <a href=""
+       class="dev-forget close"
+       tooltip="{{ 'nav.device-forget-tooltip' | translate }}"
+       tooltip-placement="bottom"
+       tooltip-append-to-body="true"
+       tooltip-trigger="mouseenter"
+       ng-click="forget(device)">&times;</a>
+
+    <div class="dev-blocked tooltip tooltip-danger in right"
+         ng-show="device.error">
+      <div class="tooltip-inner"
+           ng-switch="device.error">
+        <span ng-switch-when="Opening device failed" translate="nav.device-error-opening-failed">
+          Device could not be opened.
+          Make sure you don't have myBWallet running in another tab or browser window!
+        </span>
+        <span ng-switch-default>{{device.error}}</span>
+      </div>
+      <div class="tooltip-arrow"></div>
+    </div>
+
+    <ul class="nav nav-devices-accounts">
+      <!-- Account -->
+      <li ng-repeat="account in device.accounts"
+          ng-class="{ disabled: account.balance == null }">
+        <a ng-href="{{ accountLink(device, account)}}"
+           ng-class="{ active: isActive('/device/{{device.id}}/account/{{account.id}}') }"
+          >{{account.label()}}
+          <small class="dev-acc-info">
+            <span ng-if="account.balance != null">
+              ({{account.balance | amount}} {{account.coin.coin_shortcut}})
+            </span>
+            <span ng-if="account.balance == null">
+              <span class="icon-loading" title="{{ 'nav.account-status-loading' | translate }}"></span>
+            </span>
+            <span ng-if="account.isOffline()"
+                  class="pull-right text-danger">
+              <span class="glyphicon glyphicon-warning-sign"></span> {{ 'nav.account-status-offline' | translate }}
+            </span>
+          </small>
+        </a>
+      </li>
+    </ul>
+
+    <div ng-if="!device.isEmpty()">
+      <div ng-if="!device.canAddAccount()"
+           tooltip="{{ 'nav.account-add-tooltip' | translate }}"
+           tooltip-placement="bottom"
+           tooltip-trigger="mouseenter">
+        <a ng-href="" class="btn btn-sm"
+           disabled
+          ><span class="glyphicon glyphicon-plus"></span> {{ 'nav.account-add' | translate }}</a>
+      </div>
+
+      <div ng-if="device.canAddAccount()">
+        <a ng-href="" class="btn btn-sm"
+           ng-click="addAccount(device)"
+           ng-disabled="addingInProgress"
+          ><span class="glyphicon glyphicon-plus"></span> {{ 'nav.account-add' | translate }}</a>
+      </div>
+    </div>
+
+    <hr ng-hide="$last">
+  </li>
+</ul>

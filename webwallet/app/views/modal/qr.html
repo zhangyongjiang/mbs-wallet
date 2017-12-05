@@ -1,0 +1,12 @@
+<div class="modal-header">
+  <button type="button" class="close" title="{{ 'modal.qr.close' | translate }}"
+          ng-click="$dismiss()">&times;</button>
+  <h4 class="modal-title" translate="modal.qr.scan-address">Scan address from a QR code</h4>
+</div>
+<div class="modal-body">
+  <qr-scan ng-model="qr.address"></qr-scan>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default pull-left"
+      ng-click="$dismiss()" translate="modal.qr.cancel">Cancel</button>
+</div>

@@ -1,0 +1,90 @@
+<div ng-controller="DeviceCtrl">
+
+  <fieldset class="row" ng-disabled="device.status() !== 'connected'">
+
+    <div class="devinfo col-md-12" ng-hide="device.isEmpty()">
+      <ng-include src="'views/device/index.info.html'"></ng-include>
+    </div>
+
+    <div class="devsetup col-md-8" ng-show="device.isEmpty()">
+      <ng-include src="'views/device/index.setup.html'"></ng-include>
+    </div>
+
+    <div class="devrestore col-md-4 text-center" ng-show="device.isEmpty()">
+      <p class="help-block" translate="device.index.recovery-question">Want to restore your wallet from recovery seed?</p>
+      <a class="btn btn-default"
+         ng-href="#/device/{{device.id}}/recovery"
+         translate="device.index.recovery"
+        >TREZOR Recovery</a>
+    </div>
+
+  </fieldset>
+
+  <div class="row"
+       ng-if="device.accounts.length"
+       ng-controller="DeviceInfoCtrl">
+
+    <div class="col-xs-12">
+      <div class="line-divider"
+           ng-hide="advanced">
+        <hr>
+        <div class="line-divider-content text-center">
+          <button class="btn btn-xs btn-default"
+                  ng-click="advanced = !advanced">
+            {{ 'device.index.advanced-details' | translate }}
+            <span class="caret"></span>
+          </button>
+        </div>
+      </div>
+
+      <div ng-show="advanced">
+        <hr>
+        <div class="row">
+          <div class="col-md-8">
+            <h4 translate="device.index.account-public-keys">Account public keys (XPUB)</h4>
+            <p>
+              <span class="text-danger" translate="device.index.xpub-advice">Be careful with your account XPUB.</span> {{ 'device.index.xpub-advice-message' | translate }}
+            </p>
+            <ul class="nav nav-devices-accounts text-break">
+              <li ng-repeat="account in device.accounts"
+                  ng-mouseenter="highlightXpub(account.publicKey())"
+                  ng-mouseleave="highlightXpub(null)"
+                  class="text-muted">
+                <small>
+                  <strong>{{account.label()}}</strong><br/>{{account.publicKey()}}
+                </small>
+              </li>
+            </ul>
+            <p class="alert alert-info alert-withicon">
+              <span class="glyphicon glyphicon-info-sign alert-icon"></span>
+              <strong translate="device.index.hint">Hint:</strong> <span translate="device.index.hint-message"></span>
+            </p>
+          </div>
+          <div class="col-md-4">
+            <div ng-if="highlightedXpub">
+              <qr size="150" text="highlightedXpub"></qr>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+          	<h4 translate="">Bootloader hash</h4>
+            <p>
+              {{device.bootloaderHash()}}
+            </p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-8">
+            <a class="btn btn-danger"
+               ng-href="#/device/{{device.id}}/wipe">
+              <span class="glyphicon glyphicon-trash"></span>
+              {{ 'device.index.wipe-device' | translate }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+License: See LICENSE file (same as the libzmq license = LGPLv3 + static link exception)
+Contribution policy: http://rfc.zeromq.org/spec:22
+
+==========================
+Debian/Ubuntu Instructions
+==========================
+
+Note that you need g++ 4.7 or higher. For this reason Ubuntu 12.04 and older are not supported.
+Make sure you have installed czmq beforehand according to its build
+instructions.
+
+  VVVVVVVVVVV
+> Start Here! <
+  ^^^^^^^^^^^
+
+  $ autoreconf -i
+  $ ./configure
+  $ make
+  $ sudo make install
+  $ sudo ldconfig
+
+libczmq++ is now installed in /usr/local/.
+

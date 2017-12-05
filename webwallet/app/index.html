@@ -1,0 +1,262 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>my BWallet</title>
+    <meta name="description" content="my BWallet">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- build:css({.tmp,app}) styles/styles.css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap-slider/dist/css/bootstrap-slider.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body>
+    <!--[if lt IE 9]>
+    <div class="browsehappy alert alert-warning" id="browsehappy-container">
+      <h4>You are using an <strong>outdated</strong> browser.</h4>
+      Please <a href="http://browsehappy.com">upgrade your browser</a>
+      to improve your experience.
+    </div>
+    <![endif]-->
+
+    <!--[if gte IE 9 | !IE ]><!-->
+    <div class="page-header navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">
+            <img src="images/logo.png" height="45" alt="my BWallet" id="logo-img-english">
+            <img src="images/logo_zh.png" height="45" alt="my BWallet" id="logo-img-chinese" style="display: none;">
+          </a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="#" id="nav-wallet">Wallet</a></li>
+          <li><a target="_blank" href="http://www.coincola.com/shops/54c1fc24963d3759182b2c7f?locale=en" id="nav-what">Buy BWallet</a></li>
+          <li><a target="_blank" href="http://mybwallet.com/docs/faq/zh/" id="nav-news">FAQ</a></li>
+          <li><a target="_blank" href="http://mybwallet.com/docs/help/zh/" id="nav-help">Help</a></li>
+          <li><a target="_blank" href="http://mybwallet.com/resources/en/" id="nav-resources">Resources</a></li>
+          <li><a href="mailto:support@bidingxing.com" id="nav-support">Support</a></li>
+          <li><a href="#" id="nav-language" >中文</a></li>
+        </ul>
+      </div>
+    </div>
+	
+	<div id="app-loading" style="height:150px; text-align:center; padding-top:100px;">
+        <img src="images/loading.gif"/>
+    </div>
+	
+    <!-- Webwallet Application -->
+    <div id="webwalletApp-container" ng-cloak>
+
+      <div ng-controller="LanguageCtrl" id="languageCtrl-container">
+      </div>
+
+      <!-- Error -->
+      <div ng-controller="ErrorCtrl"
+        ng-cloak>
+        <div class="page-container container"
+          ng-if="error">
+          <ng-include src="'views/error.html'"></ng-include>
+        </div>
+
+      <div ng-if="!error">
+        <!-- Bar shown if the plugin is used and is deprecated  -->
+        <div class="alert alert-warning alertbar"
+          ng-if="usingPluginTransport && deprecatePlugin">
+          <div class="container">
+            <div class="form-inline">
+              <strong>Plugin is deprecated.</strong>
+              Long live the bridge! New and shiny, just for you.
+              <a class="btn btn-warning"
+                ng-href="{{ selectedInstaller.url }}">
+                <span class="glyphicon glyphicon-download"></span>
+                Download
+              </a>
+              <select class="form-control"
+                placeholder="Select platform..."
+                ng-model="selectedInstaller"
+                ng-options="
+                installer as 'for ' + installer.label
+                for installer
+                in installers
+                track by installer.platform">
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Outdated firmware bar -->
+          <div ng-controller="FirmwareCtrl">
+        <div class="alert alert-warning alertbar"
+          ng-if="optionalFirmware">
+          <div class="container">
+            <strong translate="index.firmware.title">New BWallet firmware is available.</strong>
+            {{ 'index.firmware.message' | translate }}
+            <button class="btn btn-sm btn-warning"
+                    ng-click="optionalFirmware.update()" translate="index.firmware.show-details">Show details</button>
+          </div>
+        </div>
+          </div>
+
+        <div class="page-container container">
+          <div class="row">
+            <!-- Navigations -->
+            <div class="col-md-3"
+              ng-include="'views/nav.html'">
+            </div>
+
+            <!-- Content view -->
+            <div class="page-content col-md-9">
+              <flash-messages>
+                <div ng-repeat="m in messages"
+                     ng-switch="m.level">
+                  <div class="alert alert-flash alert-danger"
+                       ng-switch-when="error">
+                    <h4 class="text-capitals">{{m.level | translate}}!</h4>
+                    {{m.text}}
+                    <span ng-if="m.html" ng-bind-html="m.html"></span>
+                    <ng-include src="'views/debug.button.html'"></ng-include>
+                  </div>
+                  <div class="alert alert-flash alert-{{m.level}}"
+                       ng-switch-default>
+                    <h4 class="text-capitals">{{m.level| translate}}</h4>
+                    {{m.text}}
+                    <span ng-if="m.html" ng-bind-html="m.html"></span>
+                    <ng-include src="'views/debug.button.html'"></ng-include>
+                  </div>
+                </div>
+              </flash-messages>
+              <ng-include src="'views/debug.log.html'"></ng-include>
+              <div ng-view></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="page-footer container">
+      	<span translate="index.footer">
+          Copyright &copy; 2014
+          <a href="http://bidingxing.com/" target="_blank">Bidingxing</a> |
+          Backend based on 
+          <a href="https://libbitcoin.org/" target="_blank">libbitcoin</a>
+      	</span>
+        <span class="pull-right">
+          <ng-include src="'views/debug.link.html'"></ng-include>
+        </span>
+      </div>
+    </div>
+    <!--<![endif]-->
+
+    <!-- build:js scripts/libs.js -->
+    <script src="bower_components/lodash/dist/lodash.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bitcoinjs-lib/build/bitcoinjs.js"></script>
+    <script src="bower_components/bwallet.js/dist/trezor.js"></script>
+    <script src="bower_components/qrcode/lib/qrcode.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="scripts/vendor/sha512.js"></script>
+    <script src="scripts/vendor/ecurve.js"></script>
+    <script src="scripts/vendor/buffer.js"></script>
+    <script src="scripts/vendor/Box2D_IE9_10_shim.js"></script>
+    <!-- jsqrcode -->
+    <script src="bower_components/jsqrcode/src/grid.js"></script>
+    <script src="bower_components/jsqrcode/src/version.js"></script>
+    <script src="bower_components/jsqrcode/src/detector.js"></script>
+    <script src="bower_components/jsqrcode/src/formatinf.js"></script>
+    <script src="bower_components/jsqrcode/src/errorlevel.js"></script>
+    <script src="bower_components/jsqrcode/src/bitmat.js"></script>
+    <script src="bower_components/jsqrcode/src/datablock.js"></script>
+    <script src="bower_components/jsqrcode/src/bmparser.js"></script>
+    <script src="bower_components/jsqrcode/src/datamask.js"></script>
+    <script src="bower_components/jsqrcode/src/rsdecoder.js"></script>
+    <script src="bower_components/jsqrcode/src/gf256poly.js"></script>
+    <script src="bower_components/jsqrcode/src/gf256.js"></script>
+    <script src="bower_components/jsqrcode/src/decoder.js"></script>
+    <script src="bower_components/jsqrcode/src/qrcode.js"></script>
+    <script src="bower_components/jsqrcode/src/findpat.js"></script>
+    <script src="bower_components/jsqrcode/src/alignpat.js"></script>
+    <script src="bower_components/jsqrcode/src/databr.js"></script>
+    <!-- angular modules -->
+    <script src="bower_components/angular-qr/src/angular-qr.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+    <!-- bootstrap modules -->
+    <script src="bower_components/bootstrap/js/alert.js"></script>
+    <script src="bower_components/bootstrap/js/button.js"></script>
+    <script src="bower_components/bootstrap/js/transition.js"></script>
+    <script src="bower_components/bootstrap/js/dropdown.js"></script>
+    <script src="bower_components/bootstrap/js/modal.js"></script>
+    <script src="bower_components/bootstrap/js/tooltip.js"></script>
+    <script src="bower_components/bootstrap/js/popover.js"></script>
+    <script src="bower_components/bootstrap-slider/js/bootstrap-slider.js"></script>
+    <!-- others -->
+    <script src="bower_components/comma-separated-values/csv.js"></script>
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/services/console.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/filters/filters.js"></script>
+    <!-- services -->
+    <script src="scripts/services/bip39.js"></script>
+    <script src="scripts/services/utils.js"></script>
+    <script src="scripts/services/slider.js"></script>
+    <script src="scripts/services/storage.js"></script>
+    <script src="scripts/services/deviceService.js"></script>
+    <script src="scripts/services/firmwareService.js"></script>
+    <script src="scripts/services/DeviceList.js"></script>
+    <script src="scripts/services/ItemStorage.js"></script>
+    <script src="scripts/services/MockDevice.js"></script>
+    <script src="scripts/services/TrezorDevice.js"></script>
+    <script src="scripts/services/TrezorBackend.js"></script>
+    <script src="scripts/services/TrezorAccount.js"></script>
+    <script src="scripts/services/uriRedirect.js"></script>
+    <!-- directives -->
+    <script src="scripts/directives/flashMessages.js"></script>
+    <script src="scripts/directives/qrScan.js"></script>
+    <script src="scripts/directives/focus.js"></script>
+    <!-- controllers -->
+    <script src="scripts/controllers/debug.js"></script>
+    <script src="scripts/controllers/error.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/language.js"></script>
+    <script src="scripts/controllers/nav.js"></script>
+    <script src="scripts/controllers/import.js"></script>
+    <script src="scripts/controllers/device/device.js"></script>
+    <script src="scripts/controllers/device/info.js"></script>
+    <script src="scripts/controllers/device/firmware.js"></script>
+    <script src="scripts/controllers/device/load.js"></script>
+    <script src="scripts/controllers/device/recovery.js"></script>
+    <script src="scripts/controllers/device/setup.js"></script>
+    <script src="scripts/controllers/device/wipe.js"></script>
+    <script src="scripts/controllers/account/account.js"></script>
+    <script src="scripts/controllers/account/receive.js"></script>
+    <script src="scripts/controllers/account/send.js"></script>
+    <script src="scripts/controllers/account/sign.js"></script>
+    <script src="scripts/controllers/modal/pin.js"></script>
+    <!-- compiled templates -->
+    <script src="scripts/templates.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>
+<script>
+	var lang = navigator.languages ? navigator.languages[0] : (navigator.language || navigator.userLanguage);
+	if (lang.indexOf("zh") == 0) {
+		var elem = document.getElementById('browsehappy-container');
+		var zhHtml = "<h3>你正在使用一个<strong>过时的</strong>浏览器。</h3>" + 
+		    "<br/><big>请<a href='http://browsehappy.com'>升级你的浏览器</a>以获得更好的体验。</big>" + 
+		    "<br/><br/><small><small>建议使用谷歌浏览器、火狐浏览器或者IE9及以上版本浏览器。 </small></small>";
+		if (elem) {
+			elem.innerHTML = zhHtml;
+		}
+	}
+</script>

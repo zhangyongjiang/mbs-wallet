@@ -1,0 +1,12 @@
+app/bower_components/
+app/revision.txt
+app/scripts/config.js
+dist/
+.DS_Store
+node_modules/
+npm-debug.log
+.tern-port
+.sass-cache
+.tmp/
+www/
+www-old/

@@ -1,0 +1,94 @@
+<div ng-controller="DeviceCtrl">
+  <div ng-controller="AccountCtrl">
+
+    <div class="alert alert-danger alert-inconsistent"
+         ng-show="account.isInconsistent()" translate="account.common.account-inconsistent-warning">
+      <strong>Warning!</strong> Account balance information is inconsistent.
+    </div>
+
+    <ng-include src="'views/account/nav.html'"></ng-include>
+
+    <div class="tab-content">
+      <table class="txlist table table-hover"
+             ng-show="account.transactions != null && account.transactions.length">
+        <thead>
+          <tr class="text-muted">
+            <th width="20%" translate="account.index.timestamp">Timestamp</th>
+            <th class="txlist-header-address" translate="account.index.address">Address</th>
+            <th width="16%" class="txlist-header-amount" translate="account.index.amount">Amount</th>
+            <th width="16%" translate="account.index.balance">Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="txlist-tx"
+              ng-repeat="tx in account.transactions">
+            <td class="txlist-date"
+                ng-if="tx.block">
+              {{tx.timestamp | date:'yyyy-MM-dd'}}
+              <small class="text-muted">{{tx.timestamp | date:'HH:mm:ss'}}</small>
+            </td>
+            <td class="txlist-date text-center text-muted"
+                ng-if="!tx.block">
+              <small title="{{ 'account.index.transaction-received-at' | translate }} {{tx.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}"
+                >{{ 'account.index.transaction-unconfirmed' | translate }}</small>
+            </td>
+            <td class="txlist-comment"
+                ng-if="tx.comment">
+              "{{tx.comment}}"
+            </td>
+            <td class="txlist-address"
+                ng-if="!tx.comment"
+                ng-switch="tx.analysis.type">
+              <a href="{{blockExplorer.urlTx}}{{tx.hash}}"
+                 class="txlist-hash"
+                 target="_blank"
+                 title="{{ 'account.index.transaction-info-link-title' | translate:blockExplorer }}"
+                 ><span class="glyphicon icon-blockchain"></span></a>
+              <a href="http://www.blockmeta.com/tx/{{tx.hash}}"
+                 class="txlist-hash"
+                 target="_blank"
+                 title="{{ 'account.index.transaction-info-link-title' | translate:{name: 'BlockMeta'} }}"
+                 ><span class="glyphicon icon-blockmeta"></span></a>
+              <span class="text-success" ng-switch-when="recv">
+                <span class="glyphicon glyphicon-circle-arrow-right" title="Received"></span> {{tx.analysis.addr.toString()}}
+              </span>
+              <span class="text-danger" ng-switch-when="sent">
+                <span class="glyphicon glyphicon-circle-arrow-left" title="Sent"></span> {{tx.analysis.addr.toString()}}
+              </span>
+              <span class="text-warning" ng-switch-when="self">
+                <span class="glyphicon glyphicon-user"></span> {{ 'account.index.address-myself' | translate }}
+              </span>
+              <span class="text-muted" ng-switch-default>
+                <span class="glyphicon glyphicon-question-sign"></span> {{ 'account.index.address-unknown' | translate }}
+              </span>
+            </td>
+            <td class="txlist-amount"
+                ng-class="{ 'text-success': tx.analysis.impact.sign > 0,
+                            'text-danger': tx.analysis.impact.sign < 0 }">
+              {{tx.analysis.impact.sign | sign}}{{tx.analysis.impact.value | amount}}
+            </td>
+            <td class="txlist-balance"
+                ng-repeat-end>
+              {{tx.balance | amount}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="txlist-empty text-center text-muted"
+           ng-show="account.transactions != null && !account.transactions.length">
+        <h4 translate="account.index.no-transactions">No transactions to display</h4>
+        <button class="btn btn-default"
+                ng-show="device.canHideAccount(account)"
+                ng-click="hideAccount()"
+                translate="account.index.hide-account"
+          >Hide this account</button>
+      </div>
+
+      <div class="txlist-loading text-center text-muted"
+           ng-show="account.transactions == null">
+        <span class="icon-loading" title="Loading transactions..." ng-attr-title="{{ 'account.index.loading-transactions' | translate }}"></span>
+      </div>
+    </div>
+  </div>
+</div>

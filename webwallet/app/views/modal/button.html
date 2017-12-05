@@ -1,0 +1,62 @@
+<div class="modal-body text-center"
+     ng-switch="code">
+
+  <div ng-switch-when="ButtonRequest_FeeOverThreshold"
+       class="alert alert-block alert-info">
+    <h4 translate="modal.button.fee-over-threshold">Fee is over threshold.</h4>
+    {{ 'modal.button.fee-over-threshold-message' | translate }}
+  </div>
+
+  <div ng-switch-when="ButtonRequest_ConfirmOutput"
+       class="alert alert-block alert-info">
+    <h4 translate="modal.button.confirm-output">Please confirm the transaction output on your device.</h4>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <samp class="samp-screen"
+              ng-if="output">
+          {{ output.amount | amount }} {{ account.coin.coin_shortcut }}<br>
+          {{ 'modal.button.confirm-output-to' | translate }}<br>
+          {{ output.address.substr(0, 17) }}<br>
+          {{ output.address.substr(17) }}
+        </samp>
+      </div>
+    </div>
+  </div>
+
+  <div ng-switch-when="ButtonRequest_SignTx"
+       class="alert alert-block alert-info">
+    <h4 translate="modal.button.sign-tx">Please confirm the transaction on your device.</h4>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <samp class="samp-screen"
+              ng-if="tx">
+          {{ 'modal.button.sign-tx-message-1' | translate }}<br>
+          {{ tx.outputSum | amount }} {{ account.coin.coin_shortcut }}<br>
+          {{ 'modal.button.sign-tx-message-2' | translate }}<br>
+          {{ 'modal.button.sign-tx-message-3' | translate }}<br>
+          {{ tx.fee | amount }} {{ account.coin.coin_shortcut }}
+        </samp>
+      </div>
+    </div>
+  </div>
+
+  <div ng-switch-when="ButtonRequest_ConfirmWord"
+       class="alert alert-block alert-info">
+    <h4 translate="modal.button.confirm-word">Please write down the recovery seed from your device.</h4>
+  </div>
+
+  <div ng-switch-when="ButtonRequest_WipeDevice"
+       class="alert alert-warning alert-withicon alert-lg text-left">
+    <span class="glyphicon glyphicon-warning-sign alert-icon"></span>
+    <h4 translate="modal.button.wipe-device">All data on your device will be deleted.</h4>
+    <p translate="modal.button.wipe-device-message-1">This action cannot be undone. Please <strong>confirm on your
+    device</strong>.</p>
+    <p translate="modal.button.wipe-device-message-2">Never do this action with BWallet holding coins unless you have your
+    recovery seed at hand.</p>
+  </div>
+
+  <div ng-switch-default class="alert alert-block alert-info">
+    <h4 translate="modal.button.default">Please confirm the action on your device.</h4>
+  </div>
+
+</div>

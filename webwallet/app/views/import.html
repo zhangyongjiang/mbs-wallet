@@ -1,0 +1,47 @@
+<div ng-controller="ImportCtrl">
+
+  <div class="row">
+
+    <fieldset>
+      <form name="form" class="devimport col-md-6">
+
+        <div class="alert alert-warning alert-withicon alert-lg">
+          <span class="glyphicon glyphicon-warning-sign alert-icon"></span>
+          <p translate="import.caution-content-1">This is an advanced interface intended for developer use only!</p>
+          <p translate="import.caution-content-2">Never use this process unless you really know what you are doing!</p>
+        </div>
+
+        <div class="form-group">
+          <label for="label" class="control-label" translate="import.device-id">Device ID</label>
+          <input type="text" name="id" id="id" class="form-control"
+                 ng-model="settings.id">
+        </div>
+
+        <div class="form-group">
+          <label for="label" class="control-label" translate="import.device-label">Device label</label>
+          <input type="text" name="label" id="label" class="form-control"
+                 placeholder="My BWallet"
+                 ng-model="settings.label">
+        </div>
+
+        <div class="form-group">
+          <label for="payload" class="control-label" translate="import.account-xpubs">
+            Account XPUBs
+            <small>(1 per row)</small>
+          </label>
+          <textarea name="payload" id="payload" class="form-control"
+                    ng-model="settings.payload"></textarea>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-primary"
+                  ng-click="importDevice()" translate="import.continue">Continue</button>
+          <a href="#/" class="btn btn-link" translate="import.cancel">Cancel</a>
+        </div>
+
+      </form>
+    </fieldset>
+
+  </div>
+
+</div>

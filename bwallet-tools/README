@@ -1,0 +1,11 @@
+
+1.Install hid4java
+git clone https://github.com/gary-rowe/hid4java.git
+git checkout master
+cd hid4java
+mvn clean install
+
+2.Compile and package bwallet-tools
+git clone https://github.com/bwallet/bwallet-tools.git
+cd bwallet-tools
+mvn package

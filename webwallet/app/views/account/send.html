@@ -1,0 +1,208 @@
+<div ng-controller="DeviceCtrl">
+  <div ng-controller="AccountCtrl">
+
+    <div class="alert alert-danger alert-inconsistent"
+         ng-show="account.isInconsistent()" translate="account.common.account-inconsistent-warning">
+      <strong>Warning!</strong> Account balance information is inconsistent.
+    </div>
+
+    <ng-include src="'views/account/nav.html'"></ng-include>
+
+    <div ng-controller="AccountSendCtrl">
+      <form name="form" class="form-horizontal"
+            ng-submit="send()">
+        <div class="tab-content tx-send">
+          <fieldset class="overlay-container">
+
+            <!-- Transaction outputs -->
+            <div class="tx-output"
+                 ng-repeat="output in tx.values.outputs">
+
+              <!-- Address field -->
+              <div class="form-group"
+                   ng-class="{ 'has-error': output.error.address }">
+                <label for="address" class="control-label col-sm-2" translate="account.send.address">Address</label>
+                <div class="col-sm-9">
+                  <span class="input-with-icon">
+                    <!-- Address input -->
+                    <input id="address" class="form-control" type="text"
+                           ng-model="output.address"
+                           typeahead="
+                           address.address as address.label
+                           for address in suggestAddresses() | filter:$viewValue"
+                           required>
+                    <!-- QR scan button -->
+                    <a href=""
+                       class="glyphicon glyphicon-qrcode input-icon text-muted"
+                       tooltip="{{ 'account.send.scan-qr-code' | translate }}"
+                       tooltip-append-to-body="true"
+                       ng-click="scanQr($index)"
+                       ng-show="!output.address && !qr.scanning && qr.enabled"></a>
+                  </span>
+                  <span class="help-block">
+                    {{output.error.address}}
+                  </span>
+                </div>
+                <!-- Remove output button -->
+                <div class="col-sm-1">
+                  <button type="button" class="btn btn-link pull-right"
+                          ng-show="tx.values.outputs.length > 1"
+                          ng-click="removeOutput($index)"
+                          ng-disabled="qr.scanning"
+                          tooltip="{{ 'account.send.remove-tooltip' | translate }}">
+                    <span class="text-muted">
+                      <span class="glyphicon glyphicon-remove"></span>
+                      <span class="sr-only" translate="account.send.remove">Remove</span>
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Amount fields -->
+              <div class="form-group"
+                   ng-class="{'has-error': output.error.amount}">
+                <label for="amount" class="control-label col-sm-2" translate="account.send.amount">Amount</label>
+                <div class="col-sm-10 tx-amount">
+                  <div class="input-group">
+                    <input id="amount" class="form-control" type="text"
+                           ng-model="output.amount"
+                           ng-change="convertToAltCurrency(output)"
+                           required>
+                    <div class="input-group-addon">{{account.coin.coin_shortcut}}</div>
+                  </div>
+                  <div class="input-wrapper"
+                      ng-if="currenciesAlt">
+                    <p class="form-control-static tx-amount-sep">=</p>
+                    <input type="text" class="form-control"
+                           ng-model="output.amountAlt"
+                           ng-change="convertToBtc(output)">
+                    <select class="form-control"
+                            ng-model="output.currencyAlt"
+                            ng-change="convertToAltCurrency(output)"
+                            ng-options="currency for currency in currenciesAlt">
+                    </select>
+                    <p class="form-control-static tx-amount-info" translate="account.send.exchange-rates-provided-by">
+                      Exchange rates provided by
+                      <a href="http://www.coindesk.com/price/"
+                         target="_blank">CoinDesk</a>.
+                    </p>
+                  </div>
+                  <span class="help-block" ng-if="output.error.amount">
+                    {{output.error.amount}}
+                  </span>
+                </div>
+              </div>
+
+              <hr ng-hide="$last">
+            </div>
+
+            <!-- Button bar -->
+            <div class="tx-submit form-group">
+              <div class="col-sm-10 col-sm-push-2">
+                <div class="clearfix">
+                  <div class="pull-left"
+                       tooltip="{{ 'account.send.connect-device-tooltip' | translate }}"
+                       tooltip-trigger="{{
+                       device.status() !== 'connected' ? 'mouseenter' : 'manual'
+                       }}"
+                       tooltip-placement="bottom">
+                    <button type="submit"
+                            class="btn btn-primary btn-lg"
+                            ng-disabled="device.status() !== 'connected' || !tx.prepared" translate="account.send.send">
+                      Send
+                    </button>
+                  </div>
+
+                  <div class="tx-submit-additional pull-right btn-group">
+                    <button type="button" class="btn btn-default btn-sm"
+                            ng-click="addOutput()">
+                      <span class="glyphicon glyphicon-plus"></span> {{ 'account.send.add-recipient' | translate }}
+                    </button>
+
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+                            data-toggle="dropdown">
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a href="" ng-click="promptCsv()">
+                          <span class="glyphicon glyphicon-import"></span> {{ 'account.send.import-from-csv' | translate }}
+                        </a>
+                      </li>
+                      <li ng-show="tx.values.outputs.length > 1">
+                        <a href="" ng-click="removeAllOutputs()">
+                          <span class="glyphicon glyphicon-remove"></span> {{ 'account.send.remove-all-outputs' | translate }}
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="form-control-static text-danger"
+                     ng-show="tx.error">
+                  {{tx.error}}
+                </div>
+
+                <!-- Tx fee and preview of prepared tx -->
+                <div class="form-control-static tx-preview"
+                     ng-show="tx.prepared">
+                  <h6>
+                    <span tooltip="{{ 'account.send.fee-tooltip' | translate }}"
+                          tooltip-placement="bottom"
+                          tooltip-append-to-body="true">
+                      {{ 'account.send.fee' | translate }} {{tx.fee}} {{account.coin.coin_shortcut}}
+                    </span>
+                  </h6>
+
+                  <div class="text-muted">
+                    <h6>Inputs:</h6>
+                    <ol class="list-unstyled">
+                      <li ng-repeat="input in tx.prepared.inputs">
+                        {{
+                        input.prev_hash.substr(0, 31)
+                        }}&#8203;{{
+                        input.prev_hash.substr(31)
+                        }}:{{input.prev_index}}
+                      </li>
+                    </ol>
+
+                    <h6>Outputs:</h6>
+                    <ol class="list-unstyled">
+                      <li ng-repeat="output in tx.prepared.outputs">
+                        <strong>
+                          {{output.amount | amount}}
+                          {{account.coin.coin_shortcut}}
+                        </strong>
+                        <br>
+                        <span ng-if="output.address">
+                          {{output.address}}
+                        </span>
+                        <span ng-if="output.address_n">
+                          {{output.address_n | bip32Path}} {{ 'account.send.the-change-address' | translate }}
+                        </span>
+                      </li>
+                    </ol>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Overlay with a send tx progress -->
+            <div class="overlay overlay-default"
+                 ng-if="sending">
+              <div class="overlay-content text-center">
+                <p><span class="icon-loading"></span></p>
+                <p class="h4 text-muted" translate="account.send.signing-and-sending-transaction">
+                  Signing and sending transaction&hellip;
+                </p>
+              </div>
+            </div>
+
+          </fieldset>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

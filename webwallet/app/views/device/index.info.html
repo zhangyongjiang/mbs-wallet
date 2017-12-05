@@ -1,0 +1,42 @@
+<h3>
+  {{device.label()}}
+  <button class="btn btn-default pull-right"
+          ng-click="changeLabel(device)">
+    <span class="glyphicon glyphicon-pencil"></span> {{ 'device.index.info.change-label' | translate }}
+  </button>
+</h3>
+<p class="lead">
+  <strong>{{device.balance() | amount}} {{device.defaultCoin().coin_shortcut}}</strong> {{ 'device.index.info.total-balance' | translate }}
+</p>
+
+<h5>
+  {{ 'device.index.info.pin-protection' | translate }}
+  <span ng-show="device.features.pin_protection" class="text-success" translate="device.index.info.pin-protection-enabled">Enabled</span>
+  <span ng-hide="device.features.pin_protection" class="text-danger" translate="device.index.info.pin-protection-disabled">Disabled</span>
+  <button class="btn btn-default pull-right"
+          ng-click="changePin(device)">
+    <span class="glyphicon glyphicon-pencil"></span>
+    <span ng-show="device.features.pin_protection" translate="device.index.info.change-pin">Change PIN</span>
+    <span ng-hide="device.features.pin_protection" translate="device.index.info.enable-pin">Enable PIN</span>
+  </button>
+</h5>
+<div class="row">
+  <p class="text-muted col-md-7" translate="device.index.info.pin-protection-message">
+    Using PIN protection is highly recommended. PIN prevents unauthorized persons from stealing
+    your bitcoins even when they get physical access to your device.
+  </p>
+</div>
+
+<div ng-show="device.features.passphrase_protection">
+  <h5>
+    {{ 'device.index.info.additional-passphrase' | translate }}
+    <span ng-show="device.features.passphrase_protection" class="text-success" translate="device.index.info.additional-passphrase-enabled">Enabled</span>
+    <span ng-hide="device.features.passphrase_protection" class="text-danger" translate="device.index.info.additional-passphrase-disabled">Disabled</span>
+  </h5>
+  <div class="row">
+    <p class="text-muted col-md-7" translate="device.index.info.additional-passphrase-message">
+      Encryption passphrase is additional level of security. You'll be asked for your passhrase every time
+      you want to access your wallet.
+    </p>
+  </div>
+</div>

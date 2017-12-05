@@ -1,0 +1,14 @@
+<div class="modal-header">
+  <button type="button" class="close" title="{{ 'modal.disconnect.close' | translate }}"
+          ng-if="!disableCancel"
+          ng-click="$dismiss()">&times;</button>
+  <h4 class="modal-title" translate="modal.disconnect.disconnect">Disconnect your BWallet now</h4>
+</div>
+<div class="modal-body" translate="modal.disconnect.disconnect-message">
+  myBWallet will forget your BWallet right after you disconnect it.
+</div>
+<div class="modal-footer"
+     ng-if="!disableCancel">
+  <button type="button" class="btn btn-default pull-left"
+          ng-click="$dismiss()" translate="modal.disconnect.cancel">Cancel</button>
+</div>

@@ -1,0 +1,13 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: libwallet
+Description:  Rewrite bitcoin, make it super-pluggable, very easy to do and hack everything at every level, and very configurable.
+URL: http://libbitcoin.dyne.org/libwallet/
+Version: @PACKAGE_VERSION@
+Requires: libcurl libbitcoin
+Cflags: -I${includedir}
+Libs: -L${libdir} -lwallet
+

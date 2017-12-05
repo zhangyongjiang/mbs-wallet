@@ -1,0 +1,197 @@
+<div ng-switch="state">
+
+  <div ng-switch-when="initial">
+    <div class="modal-header">
+      <button type="button" class="close" title="{{ 'modal.firmware.close' | translate }}"
+          ng-click="$dismiss()">&times;</button>
+      <h4 class="modal-title" translate="modal.firmware.outdated-title">Your device firmware is outdated</h4>
+    </div>
+    <div class="modal-body">
+      <p translate="modal.firmware.outdated-content-1">Our team is constantly working on adding new features to BWallet.
+      To enjoy full functionality and security of your device, we
+      strongly recommend you to update.<p>
+
+      <p translate="modal.firmware.outdated-content-2"><strong>To update the firmware, please disconnect your device and then plug it
+      in while holding both device buttons pressed</strong>.</p>
+
+      <p class="alert alert-info alert-withicon">
+        <span class="glyphicon glyphicon-info-sign alert-icon"></span>
+        {{ 'modal.firmware.more-information' | translate }}
+        <a href="http://mybwallet.com/docs/help/zh/" target="_blank">{{ 'modal.firmware.see-manual' | translate }}</a>.
+      </p>
+
+      <div class="firmware-info">
+        <h5 translate="modal.firmware.firmware-info">Firmware info</h5>
+        <dl>
+          <dt translate="modal.firmware.current-firmware">Current firmware:</dt>
+          <dd>{{version[0]}}.{{version[1]}}.{{version[2]}}</dd>
+          <dt translate="modal.firmware.available-firmware">Available firmware:</dt>
+          <dd>{{firmware.version[0]}}.{{firmware.version[1]}}.{{firmware.version[2]}}</dd>
+        </dl>
+
+        <div ng-if="firmware.changelog">
+          <h5 translate="modal.firmware.changelog">Changelog</h5>
+          <p class="firmware-changelog">{{firmware.changelog}}</p>
+        </div>
+
+        <p ng-if="firmware.notes">
+          <a ng-href="{{firmware.notes}}"
+            target="_blank" translate="modal.firmware.read-notes">Read the full release notes</a>
+        </p>
+      </div>
+
+      <a class="btn btn-link"
+         href="mailto:support@bidingxing.com" translate="modal.firmware.support-needed">Support needed?</a>
+    </div>
+    <div class="modal-footer"
+         ng-if="!firmware.required">
+      <button type="button" class="btn btn-default"
+              ng-click="$dismiss()" translate="modal.firmware.cancel">Cancel</button>
+    </div>
+  </div>
+
+  <div ng-switch-when="initial-disconnected">
+    <div class="modal-header">
+      <button type="button" class="close" title="{{ 'modal.firmware.close' | translate }}"
+          ng-click="$dismiss()">&times;</button>
+      <h4 class="modal-title" translate="modal.firmware.outdated-title">Your device firmware is outdated</h4>
+    </div>
+    <div class="modal-body">
+      <p translate="modal.firmware.disconnected">Now plug your device in with <strong>both device buttons pressed</strong>.</p>
+      <p class="alert alert-info alert-withicon">
+        <span class="glyphicon glyphicon-info-sign alert-icon"></span>
+        {{ 'modal.firmware.more-information' | translate }}
+        <a href="http://mybwallet.com/docs/help/zh/"
+            target="_blank">{{ 'modal.firmware.see-manual' | translate }}.</a>
+      </p>
+    </div>
+  </div>
+
+  <div ng-switch-when="device-bootloader">
+    <div class="modal-header">
+      <button type="button" class="close" title="{{ 'modal.firmware.close' | translate }}"
+          ng-click="$dismiss()">&times;</button>
+      <h4 class="modal-title" translate="modal.firmware.update-firmware-question">Do you want to update the device firmware?</h4>
+    </div>
+    <div class="modal-body">
+      <div class="alert alert-warning alert-withicon">
+        <span class="glyphicon glyphicon-warning-sign alert-icon"></span>
+        <h4 translate="modal.firmware.caution">Caution!</h4>
+        <p translate="modal.firmware.caution-content-1"><strong>If your BWallet is already initialized always have your Recovery seed with you before updating the firmware!</strong></p>
+        <p translate="modal.firmware.caution-content-2">In very rare cases, a firmware update might result in the need to recover the wallet
+        from Recovery seed.</p>
+        <p><strong>{{ 'modal.firmware.more-information' | translate }},
+          <a href="http://mybwallet.com/docs/help/zh/"
+             target="_blank"
+             >{{ 'modal.firmware.see-manual' | translate }}.</a></strong></p>
+      </div>
+
+      <div class="firmware-info">
+        <h5 translate="modal.firmware.firmware-info">Firmware info</h5>
+        <dl>
+          <dt ng-if="version" translate="modal.firmware.current-firmware">Current firmware:</dt>
+          <dd ng-if="version">{{version[0]}}.{{version[1]}}.{{version[2]}}</dd>
+          <dt ng-if="firmware" translate="modal.firmware.available-firmware">Available firmware:</dt>
+          <dd ng-if="firmware">{{firmware.version[0]}}.{{firmware.version[1]}}.{{firmware.version[2]}}</dd>
+        </dl>
+
+        <div ng-if="firmware.changelog">
+          <h5 translate="modal.firmware.changelog">Changelog</h5>
+          <p class="firmware-changelog">{{firmware.changelog}}</p>
+        </div>
+
+        <p ng-if="firmware.notes">
+          <a ng-href="{{firmware.notes}}"
+            target="_blank" translate="modal.firmware.read-notes">Read the full release notes</a>
+        </p>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <a class="btn btn-link pull-left"
+         href="mailto:support@bidingxing.com" translate="modal.firmware.support-needed">Support needed?</a>
+      <button type="button" class="btn btn-primary"
+              ng-click="update()" translate="modal.firmware.update">Yes, update</button>
+      <button type="button" class="btn btn-default"
+              ng-if="!firmware.required"
+              ng-click="$close()" translate="modal.firmware.cancel">Cancel</button>
+    </div>
+  </div>
+
+  <div ng-switch-when="device-normal">
+    <div class="modal-header">
+      <button type="button" class="close" title="{{ 'modal.firmware.close' | translate }}"
+          ng-click="$dismiss()">&times;</button>
+      <h4 class="modal-title" translate="modal.firmware.outdated-title">Your device firmware is outdated</h4>
+    </div>
+    <div class="modal-body">
+      <div class="alert alert-warning alert-withicon">
+        <span class="glyphicon glyphicon-warning-sign alert-icon"></span>
+        <h4 translate="modal.firmware.not-update-mode-title">Your BWallet is not in the firmware update mode.</h4>
+        <p translate="modal.firmware.not-update-mode-content">Please reconnect it <strong>while pressing both buttons simultaneously.</strong></p>
+      </div>
+    </div>
+    <div class="modal-footer"
+         ng-if="!firmware.required">
+      <button type="button" class="btn btn-default"
+              ng-click="$close()" translate="modal.firmware.cancel">Cancel</button>
+    </div>
+  </div>
+
+  <div ng-switch-when="update-downloading">
+    <div class="modal-body">
+      <div class="alert alert-info text-center">
+        <h4 translate="modal.firmware.downloading-firmware">Downloading firmware...</h4>
+      </div>
+    </div>
+  </div>
+
+  <div ng-switch-when="update-flashing">
+    <div class="modal-body">
+      <div class="alert alert-info text-center">
+        <h4 translate="modal.firmware.uploading-firmware">Uploading firmware...</h4>
+        <p translate="modal.firmware.confirm-update">If asked, please confirm the update on your device.</p>
+        <!-- #TODO pridat obrazek akce na trezoru -->
+      </div>
+    </div>
+  </div>
+
+  <div ng-switch-when="update-check">
+    <div class="modal-body">
+      <div class="alert alert-info text-center">
+        <h4 translate="modal.firmware.confirm-fingerprint-title">Please confirm the firmware fingerprint.</h4>
+        <p translate="modal.firmware.confirm-fingerprint-content">Make sure the same fingerprint is displayed on the device screen.</p>
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <samp class="samp-screen"
+                  ng-if="firmware && firmware.fingerprint">
+              {{firmware.fingerprint.substr(0, 16)}}<br>
+              {{firmware.fingerprint.substr(16, 16)}}<br>
+              {{firmware.fingerprint.substr(32, 16)}}<br>
+              {{firmware.fingerprint.substr(48, 16)}}
+            </samp>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-switch-when="update-success">
+    <div class="modal-body">
+      <div class="alert alert-success text-center">
+        <h4 translate="modal.firmware.update-successful">Update was successful</h4>
+        <p translate="modal.firmware.unplug-device">Please unplug the device now.</p>
+      </div>
+    </div>
+  </div>
+
+  <div ng-switch-when="update-error">
+    <div class="modal-body">
+      <div class="alert alert-danger text-center">
+        <h4 translate="modal.firmware.update-failed">Update failed</h4>
+        <p>{{error}}</p>
+      </div>
+    </div>
+  </div>
+
+</div>

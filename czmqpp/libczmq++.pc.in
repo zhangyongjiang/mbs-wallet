@@ -1,0 +1,13 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: libczmq++
+Description:  Object helpers for czmq.
+URL: https://github.com/zeromq/czmqpp
+Version: @PACKAGE_VERSION@
+Requires: libczmq
+Cflags: -I${includedir} -std=c++11
+Libs: -lczmq++
+

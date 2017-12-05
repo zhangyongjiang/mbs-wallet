@@ -1,0 +1,62 @@
+<div class="modal-header">
+  <button type="button" class="close" title="{{ 'modal.passphrase.close' | translate }}"
+          ng-click="$dismiss()">&times;</button>
+  <h4 class="modal-title" translate="modal.passphrase.enter-passphrase">Please enter your passphrase</h4>
+</div>
+<div class="modal-body">
+  <form id="passphrase-form"
+        ng-init="installHandler()">
+    <div class="form-group">
+      <input type="text"
+             class="form-control input-lg" size="12"
+             autocomplete="off"
+             ng-model="values.passphrase"
+             ng-show="showPassphrase">
+      <input type="password"  id="passphrase-input"
+             class="form-control input-lg" size="12"  autofocus
+             autocomplete="off"
+             ng-model="values.passphrase"
+             ng-hide="showPassphrase">
+      <div ng-show="check" style="margin-top: -1px">
+        <input type="text"
+               class="form-control input-lg" size="12"
+               autocomplete="off" placeholder="{{ 'modal.passphrase.re-type' | translate }}"
+               ng-model="values.passphraseCheck"
+               ng-show="showPassphrase">
+        <input type="password"
+               class="form-control input-lg" size="12"
+               autocomplete="off" placeholder="{{ 'modal.passphrase.re-type' | translate }}"
+               ng-model="values.passphraseCheck"
+               ng-hide="showPassphrase">
+      </div>
+      <span class="help-block" translate="modal.passphrase.passphrase-case-sensitive">Note that passphrase is case-sensitive.</span>
+    </div>
+    <div class="form-group">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" ng-model="showPassphrase" ng-checked="false">
+          {{ 'modal.passphrase.show-passphrase' | translate }}
+        </label>
+      </div>
+    </div>
+    <p class="text-danger"
+        ng-show="
+        check &&
+        passphrase &&
+        passphraseCheck &&
+        passphrase !== passphraseCheck" translate="modal.passphrase.passphrase-not-match">
+      Passphrases do not match!
+    </p>
+    <p class="text-danger"
+        ng-show="
+        passphrase.length > 50 ||
+        passphraseCheck.length > 50" translate="modal.passphrase.passphrase-too-long">
+      Passphrase is too long!
+    </p>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" id="passphrase-submit"
+          class="btn btn-block btn-primary btn-lg"
+          ng-disabled="!checkCorrect" translate="modal.passphrase.enter">Enter</button>
+</div>

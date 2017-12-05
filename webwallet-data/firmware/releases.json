@@ -1,0 +1,38 @@
+[
+	{
+		"required": true,
+		"version": [1, 3, 3],
+		"min_version": [0, 0, 0],
+		"min_plugin_version": [1, 0, 5],
+		"url": "/data/firmware/bwallet-1.3.3.bin.hex",
+		"fingerprint": "a8100efdb655a886b9f177001e20d81f8adf4eda85e40311cab6ffb2e2aec99b",
+		"changelog": "* Stable release, mandatory update\n* Ask for PIN on GetAddress and GetPublicKey\n* Signing speed improved\n* Bug fixes for Account Label Setting"
+	},
+	{
+		"required": true,
+		"version": [1, 3, 1],
+		"min_version": [0, 0, 0],
+		"min_plugin_version": [1, 0, 5],
+		"url": "/data/firmware/bwallet-1.3.1.bin.hex",
+		"fingerprint": "9cfb55729c9a46e072d1ce61218f32e48c0ac84893168e5f67a9b59684f52bb9",
+		"changelog": "* Stable release, mandatory update\n* Added support for Mycelium 2.3.1 and above\n* Added support for Electrum\n* Added setting for account label\n* Added option to change home screen\n* Added support for message encrypt/decrypt\n* Added option to enable/disable passphrase\n* Added visual validation of receiving address\n* Removed cpu_sn in Features Message\n* Enabled stack overflow protection"
+	},
+	{
+		"required": true,
+		"version": [1, 3, 0],
+		"min_version": [0, 0, 0],
+		"min_plugin_version": [1, 0, 5],
+		"url": "/data/firmware/bwallet-1.3.0.bin.hex",
+		"fingerprint": "015b66657d928efca5e757d5322bac703be7ad915392f75e3e0af6c6f8488190",
+		"changelog": "* Stable release, mandatory update\n* Added stack overflow protection\n* Added chinese language support"
+	},
+	{
+		"required": true,
+		"version": [1, 2, 1],
+		"min_version": [0, 0, 0],
+		"min_plugin_version": [1, 0, 5],
+		"url": "/data/firmware/bwallet-1.2.1.bin.hex",
+		"fingerprint": "33cb28ca10352068feb24b8d204a731be001b0bfa909e19b3c241bfdee113e5d",
+		"changelog": "* Stable release, mandatory update\n* Added stack overflow protection\n* Added chinese language support"
+	}
+]

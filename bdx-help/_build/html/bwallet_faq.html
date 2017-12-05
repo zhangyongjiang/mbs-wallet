@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>BWallet 常见问题 &mdash; BWallet 常见问题 1.0 文档</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="BWallet 常见问题 1.0 文档" href="index.html"/>
+        <link rel="prev" title="目录" href="index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="fa fa-home"> BWallet 常见问题</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">BWallet 常见问题</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">BWallet是什么？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">BWallet的优势？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">什么设备上可以使用BWallet？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">支持其他数字货币吗？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">没有BWallet设备可以操作里面的比特币吗？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">BWallet被盗会不会丢失比特币？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pin">如果忘记PIN码怎么办？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#recovery-seed">如果“种子卡”(Recovery seed)被盗怎么办？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#passphrase">如果忘记“种子密码”(passphrase)怎么办？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">重新刷新固件与恶意的固件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">用电子显微镜检查BWallet的存储器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">恶意的攻击，用假的BWallet来伪造</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mybwallet-com">mybwallet.com被黑客控制并且固件签名</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">如果mybwallet.com网站关闭了怎么办？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">BWallet是否预置私钥、地址?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bwallet-bootloader-firmware">如何检查BWallet的引导程序(bootloader)和固件(firmware)?</a></li>
+</ul>
+</li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">BWallet 常见问题</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>BWallet 常见问题</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/bwallet_faq.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="bwallet">
+<h1>BWallet 常见问题<a class="headerlink" href="#bwallet" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2>BWallet是什么？<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>BWallet是一款方便、直观，并能让您安全地储存和交易比特币的硬件钱包。即使在不安全或者有漏洞的电脑上进行比特币交易，也能保护资金安全。</p>
+<p>BWallet设备能物理随机产生私钥、存储私钥、独立完成签名运算而不发送私钥到计算机。当用户想要进行一笔交易时，外界只发送交易请求到BWallet设备，并要求数字签名。BWallet屏幕显示所有请求的比特币数量和目标地址。用户可通过BWallet设备的按钮确认交易，BWallet将在设备内部进行签名运算，并返回签名结果，整个过程不会泄露比特币钱包的私钥。因此，用户甚至可以在有漏洞或被黑客攻击的电脑上使用BWallet设备。</p>
+</div>
+<div class="section" id="id2">
+<h2>BWallet的优势？<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<dl class="docutils">
+<dt>对比普通Web钱包：</dt>
+<dd><ul class="first simple">
+<li>Web钱包服务器被黑客攻击导致比特币丢失；</li>
+<li>Web钱包公司倒闭；</li>
+<li>被执法机构没收比特币；</li>
+<li>Web钱包公司携币跑路；</li>
+<li>Web钱包漏洞导致丢失比特币；</li>
+<li>电脑或手机被盗或者其他人登录你的电脑或手机导致丢失比特币；</li>
+</ul>
+<p class="last">如果你使用BWallet设备管理比特币，以上事情都不会发生。</p>
+</dd>
+<dt>对比比特币桌面客户端：</dt>
+<dd><ul class="first simple">
+<li>如果你将比特币存在电脑，电脑被黑客攻击或者被盗，你的比特币将丢失；</li>
+<li>电脑太大，携带不便；</li>
+</ul>
+<p class="last">如果你使用BWallet设备管理比特币，以上事情都不会发生。</p>
+</dd>
+<dt>对比手机钱包：</dt>
+<dd><ul class="first simple">
+<li>有些手机钱包，仅仅是通过移动接口连接Web钱包，存在与Web钱包一样的风险；</li>
+<li>存在和比特币客户端一样的风险。被黑客攻击或者被盗，你的比特币将丢失；</li>
+</ul>
+<p class="last">如果你使用BWallet设备管理比特币，以上事情都不会发生。</p>
+</dd>
+<dt>对比U盘:</dt>
+<dd><ul class="first last simple">
+<li>U盘仅能存储私钥，并不具有计算能力。当你使用比特币的时候，需要将U盘插入电脑，并允许软件直接读取私钥。这是病毒和恶意软件将被允许访问您的私钥。</li>
+<li>与此相反，BWallet设备与计算机交互的仅仅是签名结果，而并没有私钥。签名计算是由BWallet内置的处理器独立完成。</li>
+</ul>
+</dd>
+<dt>对比加密钱包:</dt>
+<dd><p class="first">即使采用强加密钱包，依然不能阻止病毒潜入你的电脑、读取你的文件、记录你从键盘输入的密码。</p>
+<p class="last">如果你使用BWallet设备管理比特币，以上事情都不会发生。</p>
+</dd>
+</dl>
+<div class="admonition important">
+<p class="first admonition-title">重要</p>
+<p class="last">BWallet设备从未发送私钥到计算机。BWallet设备收到发送请求的时候会在屏幕上显示交易详情，并要求人工确认。并且你输入PIN码是需要配合BWallet显示的九宫格才能完成输入的。</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>什么设备上可以使用BWallet？<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>MyBWallet.com 全面支持</li>
+<li>不久将推出Android应用（需要支持OTG的Android设备）</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id4">
+<h2>支持其他数字货币吗？<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>目前只支持比特币。</li>
+<li>后续将逐步支持莱特币、狗币等其他数字货币，届时您只需要升级固件即可，无需购买新的BWallet设备。</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id5">
+<h2>没有BWallet设备可以操作里面的比特币吗？<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>不可以。不过您可以通过“种子卡”（Recover seed）将钱包恢复到多个BWallet上。</li>
+<li>保险箱一个，家里一个，办公室一个。这是一个不错的主意。</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id6">
+<h2>BWallet被盗会不会丢失比特币？<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<p>我们强烈建议启用PIN码。因为启用PIN码之后，即使BWallet被盗也几乎不可能丢失比特币。</p>
+<p>BWallet的PIN码，它可以是最多10 个数字（1 到9之间）的数字保护，以设置4位PIN码来计算有6561可能。 如果设定好PIN码，盗窃者它会采取几百到几千次来猜测设置的PIN码。 而每输入一个错误的PIN每次等待时间增加2的幂次方，也就是说，一旦输入错误后，必须等待几秒钟或者更长的时间，才可以尝试另一组PIN。 即使只是试图破解20组PIN码将需要大约6天（150小时）。 尝试30组PIN码需时约17年。 尝试100组随机PIN码将需要很长的时间。</p>
+<p>而且PIN码输入失败次数是被存储在BWallet的存储器里。这意味着重复上电BWallet也不会让等待时间归零。解决等待最好的方法是输入正确有PIN使用得等待计时器清零。</p>
+<p>而这也有足够的时间让您利用“种子卡”（Recover seed）将钱包恢复到新的BWallet设备上，并转移比特币。</p>
+</div>
+<div class="section" id="pin">
+<h2>如果忘记PIN码怎么办？<a class="headerlink" href="#pin" title="永久链接至标题">¶</a></h2>
+<p>如果忘记PIN码，请确保您的“种子卡”还在，然后“擦除设备”（擦除设备是不需要PIN码的），然后利用利用“种子卡”将钱包恢复到BWallet设备，恢复时可以设置新的PIN码。</p>
+</div>
+<div class="section" id="recovery-seed">
+<h2>如果“种子卡”(Recovery seed)被盗怎么办？<a class="headerlink" href="#recovery-seed" title="永久链接至标题">¶</a></h2>
+<p>“种子卡”（Recover seed）不是日常需要的，请妥善保管。如果种子卡被盗，比特币就有被盗的风险。当然你也可以通过“种子密码”（passphrase）来提高安全级别。</p>
+</div>
+<div class="section" id="passphrase">
+<h2>如果忘记“种子密码”(passphrase)怎么办？<a class="headerlink" href="#passphrase" title="永久链接至标题">¶</a></h2>
+<p>“种子密码”（passphrase）是高级功能，它能进一步提高BWallet安全性。如果你忘记你的种子密码，你的钱包将永久地丢失，并且绝对不可能恢复你的资金。</p>
+<div class="admonition important">
+<p class="first admonition-title">重要</p>
+<p class="last">如果您启用这个功能，我们建议您将“ 种子密码”（passphrase）也记录下来（并且不要和“种子卡”放在一起），并妥善保管。种子密码可以看作种子的第25个单词，但它并没有保存在BWallet设备中。如果你输入一个错误的种子密码，相当于创建了一个不同的钱包，这看起来像是你有一个0BTC的帐户。如果你现在选择使用种子密码，你以后将无法关掉它，反之亦然（如果你选择不使用它，你以后将无法开启它）。</p>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>重新刷新固件与恶意的固件<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<p>官方的BWallet固件是经过币定行公司的密钥进行签名的，初始化非官方的固件是允许的，但每次启动设备都会有非官方的提示。重新刷新引导程序是不可能的，所有出厂的BWallet在出厂时已进行编程安全的写熔断。</p>
+<div class="admonition important">
+<p class="first admonition-title">重要</p>
+<p class="last">如果初始化非官方固件，您之前使用的私钥种子会被清除。这样设计是出于对私钥种子的安全考虑。如果您决定使用非官方固件，在初始化非官方固件之后还需要通过“种子卡”（Recovery seed）恢复您的钱包。</p>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>用电子显微镜检查BWallet的存储器<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<p>Cortex M3这种多层的处理器的元器件比毛发还要细微，想要最终破解芯片是一个耗时的工程。到最后比特币的拥有者早已将比特币进行转移。</p>
+</div>
+<div class="section" id="id9">
+<h2>恶意的攻击，用假的BWallet来伪造<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<p>是指恶意盗取者或者自己最亲密的人盗取BWallet并用假的BWallet来代替，假的BWallet被嵌入一个无线发射器，从而获取您的PIN码、种子密码（passphrase）等。</p>
+<p>如果担心这样的攻击，可以在BWallet的背面刻上自己的签名，但是不要忘记每次使用前检查背后的签名。</p>
+<p>BWallet的上下盖是用超声波进行密封的，打开BWallet不破坏外壳的情况下是几乎不可能的。</p>
+</div>
+<div class="section" id="mybwallet-com">
+<h2>mybwallet.com被黑客控制并且固件签名<a class="headerlink" href="#mybwallet-com" title="永久链接至标题">¶</a></h2>
+<p>首先，这种情况将永远不会发生。币定行用来签名固件的私钥是非常安全的。而且用户不需要依赖币定行的签名也可以自己验证构建自定义固件程序。我们也希望信任BWallet的用户有验证固件的习惯。如果担心这一点，我们建议用户在更新之前对我们的博客、官网的发布进行检查，如果有固件不匹配源代码的问题，可以肯定是有人做了手脚。</p>
+<p>也不必担心固件升级由计算机病毒完成，BWallet在升级之前要求用户进行确认后才会写入到存储里面。</p>
+</div>
+<div class="section" id="id10">
+<h2>如果mybwallet.com网站关闭了怎么办？<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
+<p>作为比特币的狂热爱好者，我们并没有这样的计划。即使关闭，您依然是您钱包唯一拥有者。可以将BWallet连同其他BIP32,BIP39,BIP44兼容的钱包使用。我们的代码是开源的。所有人都可以维护并使用他。</p>
+</div>
+<div class="section" id="id11">
+<h2>BWallet是否预置私钥、地址?<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<p>你从官方购买的BWallet是没有预置私钥和地址的。</p>
+<p>您拿到BWallet设备之后，需要自己初始化钱包，设备随机生成种子（私钥），初始化过程中请务必填写好“种子卡”，并妥善保管。</p>
+<p>BWallet设备的随机数是由STM32的RNG模块来完成的，这种方案采集硬件、噪音、温度、电压等因素综合得到的随机数，属于硬件随机。</p>
+<p>STM32的RNG模块通过了美国国家标准技术研究所FIPS PUB 140-2 (2001 October 10)的认证。</p>
+<p>我们也对随机数做了大量的测试工作，详情见：<a class="reference external" href="https://github.com/BWallet/bdx-rng-test">https://github.com/BWallet/bdx-rng-test</a></p>
+<div class="admonition important">
+<p class="first admonition-title">重要</p>
+<p class="last">如果您依然担心，那么建议您启用“种子密码”(passphrase)的高级功能。</p>
+</div>
+</div>
+<div class="section" id="bwallet-bootloader-firmware">
+<h2>如何检查BWallet的引导程序(bootloader)和固件(firmware)?<a class="headerlink" href="#bwallet-bootloader-firmware" title="永久链接至标题">¶</a></h2>
+<p>您可以阅读我们在github上开源的代码来了解BWallet设备的所有工作细节。代码见：<a class="reference external" href="https://github.com/BWallet/bwallet-mcu">https://github.com/BWallet/bwallet-mcu</a> 。该代码包含了：引导程序（bootloader），固件（firmware），打包工具（firmware_sign.py）。</p>
+<p>github上有写明引导程序（bootloader）和固件（firmware）的hash值（您也可以自己通过编译得到），并对比设备中的hash值。</p>
+<blockquote>
+<div><ul class="simple">
+<li>BWallet设备获得固件（firmware）的hash值的方法：更新过程的最后一步可以看到固件（firmware）的hash值；</li>
+<li>BWallet设备获得bootloader的hash值的方法：将BWallet插入电脑后，在mybwallet.com的页面上可以看到bootloader的hash值；</li>
+</ul>
+</div></blockquote>
+<p>如果您是一个“技术偏执狂”或许会担心bootloader和firmware互相给出对方固定的hash值，那岂不是互相包庇？</p>
+<blockquote>
+<div><ul class="simple">
+<li>仔细阅读bwallet-mcu项目的readme文档，你可以通过打包工具（firmware_sign.py）得到自定义固件更新包（非官方）；</li>
+<li>灌入自定义固件更新包到BWallet设备；</li>
+<li>bootloader的hash通过验证，那么说明BWallet设备中bootloader与开源代码一致；</li>
+<li>bootloader可信了，那么bootloader检查的app的hash值也就可信了。</li>
+</ul>
+</div></blockquote>
+<p>如果您还有什么疑问，可联系我们：<a class="reference external" href="mailto:support&#37;&#52;&#48;bidingxing&#46;com">support<span>&#64;</span>bidingxing<span>&#46;</span>com</a></p>
+<div class="admonition important">
+<p class="first admonition-title">重要</p>
+<p class="last">如果您更新了自定义固件，而又希望还原成官方固件，只需通过mybwallet.com网站重复标准的固件升级流程即可。当然您也可以一直使用您的自定义固件，不过使用过程中会经常提示“非官方固件”。</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="目录"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; 版权所有 2014, Bidixing.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/translations.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

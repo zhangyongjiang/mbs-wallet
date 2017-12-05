@@ -1,0 +1,3 @@
+[submodule "app/data"]
+	path = app/data
+	url = git@git.oschina.net:bwallet/webwallet-data.git

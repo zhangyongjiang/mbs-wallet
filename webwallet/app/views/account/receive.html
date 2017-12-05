@@ -1,0 +1,121 @@
+<div ng-controller="DeviceCtrl">
+  <div ng-controller="AccountCtrl">
+
+    <div class="alert alert-danger alert-inconsistent"
+         ng-show="account.isInconsistent()" translate="account.common.account-inconsistent-warning">
+      <strong>Warning!</strong> Account balance information is inconsistent.
+    </div>
+
+    <ng-include src="'views/account/nav.html'"></ng-include>
+
+    <div class="tab-content">
+      <div ng-if="account.transactions === null"
+           class="text-center text-muted">
+        <h4 translate="account.receive.waiting-for-transaction-history">Waiting for transaction history&hellip;</h4>
+      </div>
+      <div ng-controller="AccountReceiveCtrl"
+           ng-if="account.transactions !== null"
+           class="row">
+
+        <div class="col-md-8">
+
+          <button class="address-list-toggleused btn btn-sm btn-link pull-right"
+                  ng-show="!usedAddresses.length && account.transactions.length"
+                  ng-click="usedAddresses = account.usedAddresses()">
+            <span class="glyphicon glyphicon-chevron-up"></span> {{ 'account.receive.show-used' | translate }}
+          </button>
+
+          <button class="address-list-toggleused btn btn-sm btn-link pull-right"
+                  ng-show="usedAddresses.length && account.transactions.length"
+                  ng-click="usedAddresses = []">
+            <span class="glyphicon glyphicon-chevron-down"></span> {{ 'account.receive.hide-used' | translate }}
+          </button>
+
+          <h5 translate="account.receive.address">Address</h5>
+
+          <div class="list-group address-list address-list-used"
+               ng-show="usedAddresses.length">
+            <a class="list-group-item"
+               ng-repeat="address in usedAddresses"
+               ng-class="{ active: activeAddress.address === address.address }"
+               ng-click="activate(address)">
+              <span class="address-list-index"
+                    >/{{address.path[address.path.length-1]}}</span>
+              <span class="address-list-address">{{address.address}}</span>
+              <small class="address-list-balance text-success pull-right"
+                >({{address.balance | amount}} {{account.coin.coin_shortcut}})</small>
+            </a>
+            <hr>
+          </div>
+
+          <div class="list-group address-list">
+            <div ng-repeat="address in addresses">
+              <a class="list-group-item"
+                  ng-class="{ active: activeAddress.address === address.address }"
+                  ng-click="activate(address)">
+                <span class="address-list-index"
+                      >/{{address.path[address.path.length-1]}}</span>
+                <span class="address-list-address">{{address.address}}</span>
+              </a>
+              <div class="line-divider"
+                  ng-show="$first">
+                <hr>
+                <div class="line-divider-content text-center">
+                  <button class="btn btn-xs btn-default"
+                      ng-disabled="addresses.length >= lookAhead"
+                      ng-click="more()">
+                    {{ 'account.receive.more-please' | translate }}
+                    <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div ng-show="addresses.length == lookAhead">
+            <p class="text-danger" translate="account.receive.more-please-message">
+              To access subsequent addresses, please use some of the
+              listed addresses in a transaction.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div>
+            <h5 translate="account.receive.qr-code">QR Code</h5>
+
+            <a class="address-qr-link"
+               href="{{blockExplorer.urlAddress}}{{activeAddress.address}}"
+               target="_blank" title="{{ 'account.receive.qr-code-link-title' | translate:blockExplorer }}">
+              <qr size="210" text="'bitcoin:' + activeAddress.address"></qr>
+            </a>
+          </div>
+
+          <div ng-if="activeAddress">
+            <h5 translate="account.receive.qr-code-details">Details</h5>
+
+            <ul class="list-unstyled">
+              <li ng-if="activeAddress.path">
+                <span class="h6" translate="account.receive.qr-code-bip32-path">BIP32 Path:</span>
+                <small class="text-monospace">{{ activeAddress.path | bip32Path }}</small>
+              </li>
+              <li ng-if="activeAddress.balance">
+                <span class="h6" translate="account.receive.qr-code-balance">Balance:</span>
+                <small class="text-success"
+                  >{{ activeAddress.balance | amount }} {{account.coin.coin_shortcut}}</small>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!--
+      <div>
+      {{ account.publicKey() }}
+      </div>
+      -->
+
+    </div>
+  </div>
+</div>

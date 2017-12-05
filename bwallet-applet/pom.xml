@@ -1,0 +1,333 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.bdx</groupId>
+	<artifactId>bwallet-applet</artifactId>
+	<version>0.0.3</version>
+	<name>BWallet Applet</name>
+	<description>BWallet Applet</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<plugins>
+			
+			<!-- compiler plug-in, setting JDK version and text encoding -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.0.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			
+			<!-- resource plug-in, setting text encoding -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                			<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Built-By>Dean Liu</Built-By>
+                            <Permissions>all-permissions</Permissions>
+                            <Application-Name>${project.name}</Application-Name>
+                            <Trusted-Library>true</Trusted-Library>
+                            <Caller-Allowable-Codebase>mybwallet.com www.mybwallet.com localhost.mybwallet.com</Caller-Allowable-Codebase>
+                            <Codebase>*</Codebase>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+		
+			<!-- proguard plug-in, obfuscate source code -->
+			<plugin>
+				<groupId>com.github.wvengen</groupId>
+				<artifactId>proguard-maven-plugin</artifactId>
+				<version>2.0.6</version>
+				<dependencies>
+					<dependency>
+						<groupId>net.sf.proguard</groupId>
+						<artifactId>proguard-base</artifactId>
+						<version>4.10</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>proguard</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<proguardVersion>4.10</proguardVersion>
+					<options>
+						<option>
+						-keep class com.bdx.bwallet.applet.MockHidDeviceInfo { *; }
+						-keep public class * extends com.google.protobuf.** { *; }
+						-keep public class * extends java.applet.Applet { public *; }
+						</option>
+					</options>
+					<libs>
+						<lib>${java.home}/lib/rt.jar</lib>
+						<lib>${java.home}/lib/jce.jar</lib>
+					</libs>
+				</configuration>
+			</plugin>
+		
+			<!--  
+			<plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                	<archive>
+                        <manifest>
+                            <mainClass>com.bdx.bwallet.applet.BWalletApplet</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <dependencySets>
+						<dependencySet>
+							<excludes>
+								<exclude>jdk.plugin:jdk.plugin</exclude>
+							</excludes>
+						</dependencySet>
+					</dependencySets>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+			-->
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<artifactSet>
+								<excludes>
+									<exclude>jdk.plugin:jdk.plugin</exclude>
+								</excludes>
+							</artifactSet>
+							<filters>
+								<filter>
+									<artifact>net.java.dev.jna:jna</artifact>
+									<excludes>
+										<exclude>com/sun/jna/freebsd-x86/**</exclude>
+										<exclude>com/sun/jna/freebsd-x86-64/**</exclude>
+										<exclude>com/sun/jna/linux-arm/**</exclude>
+										<exclude>com/sun/jna/openbsd-x86/**</exclude>
+										<exclude>com/sun/jna/openbsd-x86-64/**</exclude>
+										<exclude>com/sun/jna/sunos-sparc/**</exclude>
+										<exclude>com/sun/jna/sunos-sparcv9/**</exclude>
+										<exclude>com/sun/jna/sunos-x86/**</exclude>
+										<exclude>com/sun/jna/sunos-x86-64/**</exclude>
+										<exclude>com/sun/jna/w32ce-arm/**</exclude>
+									</excludes>
+								</filter>
+								<filter>
+									<artifact>com.googlecode.protobuf-java-format:protobuf-java-format</artifact>
+									<excludes>
+										<exclude>com/googlecode/protobuf/format/CouchDBFormat.class</exclude>
+										<exclude>com/googlecode/protobuf/format/HtmlFormat.class</exclude>
+										<exclude>com/googlecode/protobuf/format/JavaPropsFormat.class</exclude>
+										<exclude>com/googlecode/protobuf/format/JsonJacksonFormat.class</exclude>
+										<exclude>com/googlecode/protobuf/format/SmileFormat.class</exclude>
+										<exclude>com/googlecode/protobuf/format/XmlFormat.class</exclude>
+										<exclude>com/googlecode/protobuf/format/XmlJavaxFormat.class</exclude>
+										<exclude>LICENSE.txt</exclude>
+									</excludes>
+								</filter>
+								<filter>
+									<artifact>*:*</artifact>
+									<excludes>
+										<exclude>META-INF/*.SF</exclude>
+										<exclude>META-INF/*.DSA</exclude>
+										<exclude>META-INF/*.RSA</exclude>
+										<exclude>META-INF/maven/**</exclude>
+									</excludes>
+								</filter>
+							</filters>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<!-- jarsigner plug-in, sign the jar -->
+			<!--  
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jarsigner-plugin</artifactId>
+				<version>1.3.2</version>
+				<executions>
+					<execution>
+						<id>sign</id>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<keystore>keystore/bwallet.store</keystore>
+					<alias>bwallet</alias>
+					<storepass>bwallet</storepass>
+					<keypass>bwallet</keypass>
+				</configuration>
+			</plugin>
+			-->
+		</plugins>
+	</build>
+
+	<!-- Ensure that you have correctly updated the protobuf submodule using
+
+		$ cd <submodule directory>
+		$ git checkout master
+		$ git pull origin master
+		$ cd <project directory>
+		$ git add <submodule directory>
+		$ git commit -m "Updating protobuf for '<submodule>'"
+		$ git push
+
+		Then use
+
+		$ mvn -DupdateProtobuf=true clean compile
+
+		to perform the actual update and make the necessary code changes
+
+	-->
+
+	<profiles>
+		<profile>
+			<id>update-protobuf</id>
+			<activation>
+				<property>
+					<name>updateProtobuf</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<!-- Build the protobuf file -->
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>compile-protoc</id>
+								<phase>generate-sources</phase>
+								<configuration>
+									<tasks>
+										<path id="proto.path">
+											<!-- Include BWallet Common files -->
+											<fileset dir="src/main/bwallet-common/protob">
+												<include name="**/*.proto" />
+											</fileset>
+										</path>
+										<pathconvert pathsep=" " property="proto.files"
+											refid="proto.path" />
+										<exec executable="protoc" failonerror="true">
+											<!-- TODO Determine if this can be ignored -->
+											<arg value="-I=${project.basedir}/src/main/bwallet-common/protob" />
+											<arg value="--java_out=${project.basedir}/src/main/java" />
+											<arg line="${proto.files}" />
+										</exec>
+									</tasks>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.hid4java</groupId>
+			<artifactId>hid4java</artifactId>
+			<version>0.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jdk.plugin</groupId>
+			<artifactId>jdk.plugin</artifactId>
+			<version>1.7.0_51</version>
+			<scope>system</scope>
+			<systemPath>${env.JAVA_HOME}/jre/lib/plugin.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.googlecode.protobuf-java-format</groupId>
+			<artifactId>protobuf-java-format</artifactId>
+			<version>1.4-SNAPSHOT</version>
+		</dependency>
+		
+		<!-- note: typically only ".0" patch version exists for core annotations -->
+		<!--  
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		-->
+		
+		<dependency>
+			<groupId>com.cedarsoftware</groupId>
+			<artifactId>json-io</artifactId>
+			<version>2.8.0</version>
+		</dependency>
+	</dependencies>
+</project>

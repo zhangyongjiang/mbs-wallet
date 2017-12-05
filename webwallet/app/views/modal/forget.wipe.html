@@ -1,0 +1,12 @@
+<div class="modal-header">
+  <h4 class="modal-title" translate="modal.forget.wipe.finished">Wipe finished</h4>
+</div>
+<div class="modal-body">
+  <p class="alert alert-success"
+    ng-if="hideSuccessMsg" translate="modal.forget.wipe.finished-message">Your BWallet was successfully wiped.</p>
+  <p translate="modal.forget.wipe.remember-message">Would you like myBWallet to forget your old device with the old data or to remember it?</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" ng-click="$dismiss()" translate="modal.forget.wipe.remember">Remember</button>
+  <button type="button" class="btn btn-primary" ng-click="$close()" translate="modal.forget.wipe.forget">Forget (recommended)</button>
+</div>

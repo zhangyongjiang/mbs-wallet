@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <_PropertySheetDisplayName>Libwallet Library Common Settings</_PropertySheetDisplayName>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  
+  <!-- Configuration -->
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\..\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4290;4275;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <EnablePREfast>false</EnablePREfast>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0600;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(ConfigurationType)'=='DynamicLibrary'">BCW_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(ConfigurationType)'=='StaticLibrary'">BCW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  
+  <!-- Dependencies -->
+  
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(SolutionDir)obelisk.import.props" />
+    <Import Project="$(SolutionDir)libbitcoin.import.props" />
+  </ImportGroup>
+  
+  <PropertyGroup Condition="$(Configuration.IndexOf('DLL')) != -1">
+    <Linkage-zlib>dynamic</Linkage-zlib>
+    <Linkage-openssl>dynamic</Linkage-openssl>
+    <Linkage-czmqpp>dynamic</Linkage-czmqpp>
+    <Linkage-czmq>dynamic</Linkage-czmq>
+    <Linkage-libzmq>dynamic</Linkage-libzmq>
+    <Linkage-libsodium>dynamic</Linkage-libsodium>
+    <Linkage-obelisk>dynamic</Linkage-obelisk>
+    <Linkage-libbitcoin>dynamic</Linkage-libbitcoin>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.IndexOf('LTCG')) != -1">
+    <Linkage-zlib>ltcg</Linkage-zlib>
+    <Linkage-openssl>ltcg</Linkage-openssl>
+    <Linkage-czmqpp>ltcg</Linkage-czmqpp>
+    <Linkage-czmq>ltcg</Linkage-czmq>
+    <Linkage-libzmq>ltcg</Linkage-libzmq>
+    <Linkage-libsodium>ltcg</Linkage-libsodium>
+    <Linkage-obelisk>ltcg</Linkage-obelisk>
+    <Linkage-libbitcoin>ltcg</Linkage-libbitcoin>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration.IndexOf('LIB')) != -1">
+    <Linkage-zlib>static</Linkage-zlib>
+    <Linkage-openssl>static</Linkage-openssl>
+    <Linkage-czmqpp>static</Linkage-czmqpp>
+    <Linkage-czmq>static</Linkage-czmq>
+    <Linkage-libzmq>static</Linkage-libzmq>
+    <Linkage-libsodium>static</Linkage-libsodium>
+    <Linkage-obelisk>static</Linkage-obelisk>
+    <Linkage-libbitcoin>static</Linkage-libbitcoin>
+  </PropertyGroup>
+
+  <!-- Messages -->
+
+  <Target Name="LinkageInfo" BeforeTargets="PrepareForBuild">
+    <Message Text="Linkage-zlib      : $(Linkage-zlib)" Importance="high"/>
+    <Message Text="Linkage-openssl   : $(Linkage-openssl)" Importance="high"/>
+    <Message Text="Linkage-czmqpp    : $(Linkage-czmqpp)" Importance="high"/>
+    <Message Text="Linkage-czmq      : $(Linkage-czmq)" Importance="high"/>
+    <Message Text="Linkage-libzmq    : $(Linkage-libzmq)" Importance="high"/>
+    <Message Text="Linkage-libsodium : $(Linkage-libsodium)" Importance="high"/>
+    <Message Text="Linkage-obelisk   : $(Linkage-obelisk)" Importance="high"/>
+    <Message Text="Linkage-libbitcoin: $(Linkage-libbitcoin)" Importance="high"/>
+  </Target>
+
+</Project>

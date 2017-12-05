@@ -1,0 +1,12 @@
+{
+  "browser": true,
+  "strict": true,
+  "devel": true,
+  "eqnull": true,
+  "laxbreak": true,
+  "globalstrict": true,
+  "globals": {
+    "require": false,
+    "module": false
+  }
+}

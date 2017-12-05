@@ -1,0 +1,41 @@
+<div class="modal-header">
+  <button type="button" class="close" title="{{ 'modal.csv.close' | translate }}"
+          ng-click="$dismiss()">&times;</button>
+  <h4 class="modal-title" translate="modal.csv.import-from-csv">Import addresses from CSV</h4>
+</div>
+<form role="form"
+      ng-submit="submit(values)">
+  <div class="modal-body">
+    <div>
+      <p class="alert alert-danger"
+        ng-if="errMsg">{{errMsg}}</p>
+      <p translate="modal.csv.example">Example:</p>
+      <pre>address,amount
+1JwSSubhmg6iPtRjtyqhUYYH7bZg3Lfy1T,0.31337
+1C7zdTfnkzmr13HfA2vNm5SJYRK6nEKyq8,0.02342</pre>
+      <div class="form-group">
+        <label translate="modal.csv.cell-delimiter">Cell delimiter</label>
+        <input type="text" class="form-control"
+               ng-model="values.delimiter"
+               ng-trim="false">
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"
+                 ng-model="values.header">
+          {{ 'modal.csv.first-row-is-header' | translate }}
+        </label>
+      </div>
+      <div class="form-group">
+        <label translate="modal.csv.paste-the-csv-here">Paste the CSV here:</label>
+        <textarea class="form-control input-lg" cols="50" rows="10" autofocus
+                  ng-model="values.data"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default"
+            ng-click="$dismiss()" translate="modal.csv.cancel">Cancel</button>
+    <button type="submit" class="btn btn-primary" translate="modal.csv.import">Import</button>
+  </div>
+</form>

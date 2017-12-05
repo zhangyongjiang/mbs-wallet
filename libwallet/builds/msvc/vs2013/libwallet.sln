@@ -1,0 +1,78 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libwallet", "libwallet\libwallet.vcxproj", "{45FCB5AB-9F13-4E62-82AB-5E197018A31D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libwallet_examples", "examples\libwallet_examples.vcxproj", "{C3AD9980-16EC-470F-859F-006971CB632A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		DynDebug|Win32 = DynDebug|Win32
+		DynDebug|x64 = DynDebug|x64
+		DynRelease|Win32 = DynRelease|Win32
+		DynRelease|x64 = DynRelease|x64
+		LtcgDebug|Win32 = LtcgDebug|Win32
+		LtcgDebug|x64 = LtcgDebug|x64
+		LtcgRelease|Win32 = LtcgRelease|Win32
+		LtcgRelease|x64 = LtcgRelease|x64
+		StaticDebug|Win32 = StaticDebug|Win32
+		StaticDebug|x64 = StaticDebug|x64
+		StaticRelease|Win32 = StaticRelease|Win32
+		StaticRelease|x64 = StaticRelease|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.DynDebug|Win32.ActiveCfg = DebugDLL|Win32
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.DynDebug|Win32.Build.0 = DebugDLL|Win32
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.DynDebug|x64.ActiveCfg = DebugDLL|x64
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.DynDebug|x64.Build.0 = DebugDLL|x64
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.DynRelease|Win32.ActiveCfg = ReleaseDLL|Win32
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.DynRelease|Win32.Build.0 = ReleaseDLL|Win32
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.DynRelease|x64.ActiveCfg = ReleaseDLL|x64
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.DynRelease|x64.Build.0 = ReleaseDLL|x64
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.LtcgDebug|Win32.ActiveCfg = DebugLTCG|Win32
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.LtcgDebug|Win32.Build.0 = DebugLTCG|Win32
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.LtcgDebug|x64.ActiveCfg = DebugLTCG|x64
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.LtcgDebug|x64.Build.0 = DebugLTCG|x64
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.LtcgRelease|Win32.ActiveCfg = ReleaseLTCG|Win32
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.LtcgRelease|Win32.Build.0 = ReleaseLTCG|Win32
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.LtcgRelease|x64.ActiveCfg = ReleaseLTCG|x64
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.LtcgRelease|x64.Build.0 = ReleaseLTCG|x64
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.StaticDebug|Win32.ActiveCfg = DebugLIB|Win32
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.StaticDebug|Win32.Build.0 = DebugLIB|Win32
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.StaticDebug|x64.ActiveCfg = DebugLIB|x64
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.StaticDebug|x64.Build.0 = DebugLIB|x64
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.StaticRelease|Win32.ActiveCfg = ReleaseLIB|Win32
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.StaticRelease|Win32.Build.0 = ReleaseLIB|Win32
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.StaticRelease|x64.ActiveCfg = ReleaseLIB|x64
+		{45FCB5AB-9F13-4E62-82AB-5E197018A31D}.StaticRelease|x64.Build.0 = ReleaseLIB|x64
+		{C3AD9980-16EC-470F-859F-006971CB632A}.DynDebug|Win32.ActiveCfg = DebugDEXE|Win32
+		{C3AD9980-16EC-470F-859F-006971CB632A}.DynDebug|Win32.Build.0 = DebugDEXE|Win32
+		{C3AD9980-16EC-470F-859F-006971CB632A}.DynDebug|x64.ActiveCfg = DebugDEXE|x64
+		{C3AD9980-16EC-470F-859F-006971CB632A}.DynDebug|x64.Build.0 = DebugDEXE|x64
+		{C3AD9980-16EC-470F-859F-006971CB632A}.DynRelease|Win32.ActiveCfg = DebugDEXE|Win32
+		{C3AD9980-16EC-470F-859F-006971CB632A}.DynRelease|Win32.Build.0 = DebugDEXE|Win32
+		{C3AD9980-16EC-470F-859F-006971CB632A}.DynRelease|x64.ActiveCfg = ReleaseDEXE|x64
+		{C3AD9980-16EC-470F-859F-006971CB632A}.DynRelease|x64.Build.0 = ReleaseDEXE|x64
+		{C3AD9980-16EC-470F-859F-006971CB632A}.LtcgDebug|Win32.ActiveCfg = DebugLEXE|Win32
+		{C3AD9980-16EC-470F-859F-006971CB632A}.LtcgDebug|Win32.Build.0 = DebugLEXE|Win32
+		{C3AD9980-16EC-470F-859F-006971CB632A}.LtcgDebug|x64.ActiveCfg = DebugLEXE|x64
+		{C3AD9980-16EC-470F-859F-006971CB632A}.LtcgDebug|x64.Build.0 = DebugLEXE|x64
+		{C3AD9980-16EC-470F-859F-006971CB632A}.LtcgRelease|Win32.ActiveCfg = ReleaseLEXE|Win32
+		{C3AD9980-16EC-470F-859F-006971CB632A}.LtcgRelease|Win32.Build.0 = ReleaseLEXE|Win32
+		{C3AD9980-16EC-470F-859F-006971CB632A}.LtcgRelease|x64.ActiveCfg = ReleaseLEXE|x64
+		{C3AD9980-16EC-470F-859F-006971CB632A}.LtcgRelease|x64.Build.0 = ReleaseLEXE|x64
+		{C3AD9980-16EC-470F-859F-006971CB632A}.StaticDebug|Win32.ActiveCfg = DebugSEXE|Win32
+		{C3AD9980-16EC-470F-859F-006971CB632A}.StaticDebug|Win32.Build.0 = DebugSEXE|Win32
+		{C3AD9980-16EC-470F-859F-006971CB632A}.StaticDebug|x64.ActiveCfg = DebugSEXE|x64
+		{C3AD9980-16EC-470F-859F-006971CB632A}.StaticDebug|x64.Build.0 = DebugSEXE|x64
+		{C3AD9980-16EC-470F-859F-006971CB632A}.StaticRelease|Win32.ActiveCfg = ReleaseSEXE|Win32
+		{C3AD9980-16EC-470F-859F-006971CB632A}.StaticRelease|Win32.Build.0 = ReleaseSEXE|Win32
+		{C3AD9980-16EC-470F-859F-006971CB632A}.StaticRelease|x64.ActiveCfg = ReleaseSEXE|x64
+		{C3AD9980-16EC-470F-859F-006971CB632A}.StaticRelease|x64.Build.0 = ReleaseSEXE|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

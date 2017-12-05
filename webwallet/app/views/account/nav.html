@@ -1,0 +1,28 @@
+<ul ng-controller="NavCtrl"
+    class="nav nav-tabs">
+    <li ng-class="{ active: isActive('/device/{{device.id}}/account/{{account.id}}$') }">
+        <a class="btn" href="#/device/{{device.id}}/account/{{account.id}}">
+            <span class="glyphicon glyphicon-transfer"></span> {{ 'account.nav.transactions' | translate }}
+        </a>
+    </li>
+    <li ng-class="{ active: isActive('/device/{{device.id}}/account/{{account.id}}/receive$') }">
+        <a class="btn" href="#/device/{{device.id}}/account/{{account.id}}/receive">
+            <span class="glyphicon glyphicon-circle-arrow-right"></span> {{ 'account.nav.receive' | translate }}
+        </a>
+    </li>
+    <li ng-class="{ active: isActive('/device/{{device.id}}/account/{{account.id}}/send$') }">
+        <a class="btn" href="#/device/{{device.id}}/account/{{account.id}}/send">
+            <span class="glyphicon glyphicon-circle-arrow-left"></span> {{ 'account.nav.send' | translate }}
+        </a>
+    </li>
+    <li ng-class="{ active: isActive('/device/{{device.id}}/account/{{account.id}}/sign$') }"
+        tooltip="{{ 'account.nav.sign-and-verify-tooltip' | translate }}"
+        tooltip-trigger="{{ device.isConnected() ? 'manual' : 'mouseenter'}}"
+        tooltip-placement="bottom"
+        class="nav-tab-small">
+        <a class="btn" href="#/device/{{device.id}}/account/{{account.id}}/sign"
+           ng-disabled="!device.isConnected()">
+            <span class="glyphicon glyphicon-lock"></span> {{ 'account.nav.sign-and-verify' | translate }}
+        </a>
+    </li>
+</ul>

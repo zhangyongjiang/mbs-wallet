@@ -1,0 +1,48 @@
+<div class="modal-dialog"
+     ng-if="!installed">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" translate="error.install.get-started">Get started</h4>
+    </div>
+    <div class="modal-body">
+      <p class="lead" translate="{{installMessageKey}}" translate-values="{ link: javaLink, guideURLs: guideURLs }">
+        Please download and install the <a href="http://java.com/en/download/index.jsp" target="_blank">Java</a>.
+        <br />
+        <strong>Or</strong> Enable Java in the browser.
+        <br />
+        <strong>Why?</strong> The Java allows myBWallet to communicate with your BWallet device.
+      </p>
+      <!-- 
+      <p class="lead">
+        Please download and install the TREZOR Browser Plugin.
+        <strong>Why?</strong> The plugin allows myTREZOR to communicate with your TREZOR device.
+      </p>
+      <div class="text-center">
+        <p class="form-inline">
+          <a class="btn-installer-download btn btn-lg btn-success"
+             ng-href="{{ selectedInstaller.url }}">
+            <span class="glyphicon glyphicon-download"></span> Download
+          </a>
+          <select class="form-control"
+                  placeholder="Select platform..."
+                  ng-model="selectedInstaller"
+                  ng-options="
+                    installer as 'for ' + installer.label
+                    for installer
+                    in installers
+                    track by installer.platform">
+          </select>
+        </p>
+      </div>
+      -->
+    </div>
+    <div class="modal-footer">
+      <div class="text-center">
+        <small class="text-muted" translate="error.install.footer">
+        myBWallet Web Wallet is a free service provided exclusively to
+        <a href="https://www.bidingxing.com/bwallet" target="_blank">BWallet hardware wallet</a> owners.
+        </small>
+      </div>
+    </div>
+  </div>
+</div>

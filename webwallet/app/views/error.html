@@ -1,0 +1,18 @@
+<div class="modal-dialog"
+     ng-if="installed">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title alert alert-danger" translate="error.plugin-loading-failed">Plugin loading failed :(</h4>
+    </div>
+    <div class="modal-body">
+      <p class="lead" style='font-size:12px;' translate="{{pluginMessageKey}}" translate-values="{ guideURLs: guideURLs }">
+      </p>
+      <ng-include src="'views/debug.button.html'"></ng-include>
+    </div>
+    <ng-include src="'views/debug.log.html'"></ng-include>
+  </div>
+</div>
+
+<div ng-if="!installed">
+  <ng-include src="'views/error.install.html'"></ng-include>
+</div>

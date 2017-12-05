@@ -1,0 +1,12 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: libobelisk
+Description: Obelisk network interface for scalable asynchronous blockchain queries.
+Version: @PACKAGE_VERSION@
+Requires: libczmq++ libconfig++ libbitcoin
+Cflags: -I${includedir} -std=c++11
+Libs: -L${libdir} -lobelisk
+

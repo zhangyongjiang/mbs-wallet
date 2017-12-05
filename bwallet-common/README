@@ -1,0 +1,8 @@
+bwallet-common
+=============
+
+Common files shared among BWallet repositories.
+
+This repo is meant to be included as submodule to others using:
+
+git submodule add https://github.com/bwallet/bwallet-common.git bwallet-common
